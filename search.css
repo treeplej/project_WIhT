@@ -1,0 +1,42 @@
+h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+#searchBox {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#query {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#itemName, #itemContent {
+    display:inline-block;
+    padding: 20px;
+    margin: 10px;
+    width: 200px;
+    height: 300px;
+    border: 1px solid gray;
+    box-sizing: border-box;
+}
+
+#urlList {
+    display: inline-block;
+    border:1px solid gray;
+    width: 80%;
+    padding: 10px;
+    box-sizing: border-box;
+}

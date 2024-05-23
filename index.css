@@ -1,0 +1,32 @@
+h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+#searchBox {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#query {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#hotTrendChart {
+    width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
+}
