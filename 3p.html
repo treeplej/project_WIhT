@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="search.css" rel="stylesheet">
+    <title>밈 등록 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+        }
+        .content-box {
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .content-box textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .content-box input[type="file"] {
+            width: 100%;
+            padding: 10px;
+        }
+        .content-box h2 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <input type="text" placeholder="검색어를 입력하세요...">
+    </header>
+    <main>
+        <div class="content-box">
+            <h2>밈 컨텐츠 등록</h2>
+            <input type="file" accept="image/*,video/*">
+        </div>
+        <div class="content-box">
+            <h2>밈 설명</h2>
+            <textarea rows="5" placeholder="밈에 대한 설명을 입력하세요..."></textarea>
+        </div>
+    </main>
+</body>
+</html>

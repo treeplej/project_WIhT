@@ -1,9 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="search.css" rel="stylesheet">
+    <script src="app.js" defer></script>
+    <title>밈 트렌드 사이트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        main {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        section {
+            flex: 1;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            box-sizing: border-box;
+            display: flex; /* 추가 */
+            flex-direction: row; /* 추가 */
+        }
+        section:last-child {
+            border-right: none;
+        }
+        .content-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            flex: 1; /* 추가 */
+        }
+        .content-box img {
+            max-width: 100%;
+            height: auto;
+            transition: filter 0.3s ease;
+        }
+        .content-box:hover img {
+            filter: brightness(70%);
+        }
+        .content-box h3 {
+            margin-top: 10px;
+        }
+        .content-box-container {
+            display: flex;
+        }
 
+    </style>
 </head>
 <body>
-    asdf
+    <header>
+        <input type="text" placeholder="검색어를 입력하세요...">
+    </header>
+    <main>
+        <section>
+            <h2>핫트렌드 밈</h2>
+            <div class="content-box-container">
+                <div class="content-box">
+                    <img src="meme1.jpg" alt="핫트렌드 밈 이미지">
+                    <h3>핫트렌드 밈 제목</h3>
+                </div>
+                <div class="content-box">
+                    <img src="meme2.jpg" alt="핫트렌드 밈 이미지">
+                    <h3>핫트렌드 밈 제목</h3>
+                </div>
+                <div class="content-box">
+                    <img src="meme3.jpg" alt="핫트렌드 밈 이미지">
+                    <h3>핫트렌드 밈 제목</h3>
+                </div>
+            </div>
+        </section>
+             
+        <section>
+            <h2>랜덤 핫트렌드</h2>
+            <div class="content-box">
+                <img src="random_meme1.jpg" alt="랜덤 핫트렌드 이미지">
+                <h3>랜덤 핫트렌드 제목</h3>
+            </div>
+            <div class="content-box">
+                <img src="random_meme2.jpg" alt="랜덤 핫트렌드 이미지">
+                <h3>랜덤 핫트렌드 제목</h3>
+            </div>
+            <div class="content-box">
+                <img src="random_meme3.jpg" alt="랜덤 핫트렌드 이미지">
+                <h3>랜덤 핫트렌드 제목</h3>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
