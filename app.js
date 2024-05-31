@@ -102,9 +102,67 @@ router.route('/process/append').post(function (req, res) {
     });
 });
 
+router.route('/process/add').post(function(req,res){
+
+    var paramName = req.body.name || req.query.name;
+    var paramContext = req.body.context || req.query.context;
+
+    console.log('요청파라미터 : '+ paramName + ' ,' + paramContext);
+
+    if (database) {
+
+        addContent(database, paramName, paramContext, (err, result) => {
+            if (err) { throw err };
+
+            if (result) {
+                console.log(result);
+
+                // 조회 결과에서 사용자 이름 확인
+                res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+                res.write('<h1>등록 성공</h1>');
+                res.write("<br><br><a href='/public/index.html'>메인으로 돌아가기</a>");
+                res.end();
+            }
+            else {
+                // 조회된 레코드가 없는 경우 실패 응답 전송
+                res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+                res.write('<h1>등록 실패</h1');
+                res.write('<div><p>아이디와 패스워드를 다시 확인하십시오.</p></div>');
+                res.write("<br><br><a href='/public/index.html'>다시로그인하기</a>");
+                res.end();
+            }
+        });
+    } else {
+        // 데이터베이스 객체가 초기화 되지 않은 경우 실패 응답 전송
+        res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+        res.write('<h2>데이터베이스 연결 실패</h2>');
+        res.write('<div><p>데이터베이스에 연결하지 못했습니다.</p></div>');
+        res.end();
+    }
+});
+
 // 라우터 객체 등록
 app.use('/', router);
 
+var addContent = function(database, name, context, callback){
+    console.log("addcontent호출됨");
+
+    var memes = database.collection('memes');
+
+    memes.insertMany([{"name":name,"context":context}],function(err,result){
+        if(err){
+            callback(err,null);
+            return;
+        }
+        if(result.insertedCount>0){ 
+            console.log("밈 추가됨 : " + result.insertedCount)
+        }
+        else{
+            console.log("추가된 레코드 없음");
+        }
+        callback(null,result);
+    });
+}
 // 404 에러 페이지 처리
 var errorHandler = expressErrorHandler({
     static: {
