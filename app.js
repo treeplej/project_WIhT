@@ -42,38 +42,38 @@ app.use(expressSession({
 
 //====== 데이터 베이스 연결 ======//
 // 몽고DB 모듈 사용
-// var MongoClient = require('mongodb').MongoClient;
+var MongoClient = require('mongodb').MongoClient;
 
 // // 데이터베이스 객체를 위한 변수 선언
-// var database;
+var database;
 
 // 데이터베이스에 연결
-// function connectDB() {
-//     //데이터베이스 연결 정보
-//     var databaseUrl = 'mongodb://localhost:27017/local';
-//     //데이터베이스 연결=>실패시 console.log
-//     // MongoClient.connect(databaseUrl, function (err, db) {
-//     //     if (err) {
-//     //         console.log('데이터베이스 연결 실패');
-//     //         throw err;
-//     //     }
-//     //     else {
-//     //         console.log('데이터베이스에 연결되었습니다. : ' + databaseUrl);
-//     //         // database 변수에 할당
-//     //         database = db.db('local'); // mongodb>=3.0
-//     //     }
-//     // });
-//     MongoClient.connect(databaseUrl)
-//         .then(db => {
-//             console.log('데이터베이스에 연결되었습니다. : ' + databaseUrl);
-//             //database 변수에 할당
-//             database = db.db('local'); // mongodb>=3.0
-//         })
-//         .catch(err => {
-//             console.log('데이터베이스 연결 실패');
-//             throw err;
-//         })
-// }
+function connectDB() {
+    //데이터베이스 연결 정보
+    var databaseUrl = 'mongodb://localhost:27017/local';
+    //데이터베이스 연결=>실패시 console.log
+    // MongoClient.connect(databaseUrl, function (err, db) {
+    //     if (err) {
+    //         console.log('데이터베이스 연결 실패');
+    //         throw err;
+    //     }
+    //     else {
+    //         console.log('데이터베이스에 연결되었습니다. : ' + databaseUrl);
+    //         // database 변수에 할당
+    //         database = db.db('local'); // mongodb>=3.0
+    //     }
+    // });
+    MongoClient.connect(databaseUrl)
+        .then(db => {
+            console.log('데이터베이스에 연결되었습니다. : ' + databaseUrl);
+            //database 변수에 할당
+            database = db.db('local'); // mongodb>=3.0
+        })
+        .catch(err => {
+            console.log('데이터베이스 연결 실패');
+            throw err;
+        })
+}
 
 //====== 라우터 함수 등록 ======//
 
@@ -120,5 +120,5 @@ http.createServer(app).listen(app.get('port'), function () {
     console.log('서버가 시작되었습니다. 포트 : ' + app.get('port'));
 
     // 데이터 베이스 연결을 위한 함수 호출
-    //connectDB();
+    connectDB();
 });

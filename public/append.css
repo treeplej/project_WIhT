@@ -1,18 +1,121 @@
-h1 {
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
     text-align: center;
-    margin: 20px;
+    background-color: #ffffff;
+    padding: 40px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 1200px;
 }
 
-#searchBox {
-    width: 400px;
-    margin: 0 auto;
+header h1 {
+    font-size: 48px;
+    margin: 0 0 20px 0;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.site-name {
+    font-size: 30px;
+    margin-right: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.search-box form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-box input {
+    width: 60%;
+    padding: 15px;
+    font-size: 18px;
+    border: 1px solid #000;
+    outline: none;
+}
+
+.search-box button {
+    padding: 15px;
+    font-size: 18px;
+    border: 1px solid #000;
+    background-color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.search-box button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.name-box, .description-box {
     padding: 20px;
+    border: 1px solid #000;
+    font-size: 24px;
 }
 
-#query {
+.name-box {
+    width: 30%;
+    height: 100px; /* 높이 감소 */
+}
+
+.description-box {
+    width: 65%;
+    height: 400px;
+}
+
+.register-button {
+    margin-top: 20px;
+}
+
+.register-button button {
     width: 100%;
-    padding: 10px;
-    border: 1px solid gray;
-    border-radius: 5px;
-    box-sizing: border-box;
+    padding: 15px;
+    font-size: 18px;
+    border: 1px solid #000;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.register-button button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.add {
+    display: block;
+    padding: 20px 40px;
+    font-size: 24px;
+    border: 2px solid #00ff00;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    margin: 20px auto;
+}
+
+::placeholder {
+    text-align: center;
 }

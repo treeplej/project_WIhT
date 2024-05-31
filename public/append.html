@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link type="text/css" rel="stylesheet" href="/public/append.css">
-
+    <title>WIHT</title>
+    <link rel="stylesheet" href="/public/append.css">
 </head>
 <body>
-    <header>
-        <h1>WIhT</h1>
-        <form id="searchBox" action="/process/append" method="post">
-            <label for=""></label>
-            <input type="text" id="query"><br>
-        </form>
-    </header>
-    <section>
-        <div id="title"></div>
-        <textarea name="" id=""></textarea><br>
-
-    </section>
-    <footer>
-
-    </footer>
+    <div class="container">
+        <header>
+        </header>
+        <section>
+            <div class="search-container">
+                <a href="/public/index.html" class="site-name">WIHT</a>
+                <div class="search-box">
+                    <form action="/process/search" method="post">
+                        <input type="text" name="query" placeholder="검색">
+                        <button type="submit">검색</button>
+                    </form>
+                </div>
+            </div>
+            <div class="content">
+                <form action="/process/add" method="post">
+                    <input class="name-box" type="text" placeholder="이름">
+                    <textarea class="description-box" type="" placeholder="설명"></textarea>
+                    <button type="submit" class="add">등록</button>
+                </form>
+            </div>
+        </section>
+    </div>
 </body>
 </html>

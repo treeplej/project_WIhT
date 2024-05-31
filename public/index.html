@@ -1,24 +1,32 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WIhT</title>
-    <link type="text/css" rel="stylesheet" href="index.css">
+    <title>WIHT</title>
+    <link rel="stylesheet" href="/public/index.css">
 </head>
 <body>
-    <header>
-        <h1>WIhT</h1>
-        <form id="searchBox" action="/process/search" method="post">
-            <label for=""></label>
-            <input type="text" id="query"><br>
-        </form>
-    </header>
-    <section>
-        <div id="hotTrendChart">핫트렌드차트</div>
+    <div class="container">
+        <header>
+            <h1>WIHT</h1>
+        </header>
+        <section>
+            <div class="search-box">
+                <form action="/process/search" method="post">
+                    <input type="text" name="query" placeholder="검색">
+                    <button type="submit">검색</button>
+                </form>
+            </div>
+            <div class="hot-trend">
+                <p>핫트렌드 밈</p>
+            </div>
+            <div class="register-button">
+                <form action="/process/append" method="post">
+                    <br><button>등록하러가기</button>
+                </form>
+            </div>
+        </main>
     </section>
-    <footer>
-        2023 ADV
-    </footer>
 </body>
 </html>
