@@ -83,7 +83,33 @@ var router = express.Router();
 // search 요청 처리
 router.route('/process/search').post(function (req, res) {
     var newFilePath = path.join(__dirname, 'public', 'search.html');
+    
     console.log("Search route called");
+    var paramName = req.body.name || req.query.name;
+    var paramContext = req.body.context || req.query.context;
+    if (database){
+        searchMeme(database, paramName, paramContext, (err, result) => {
+            if (err) { throw err };
+
+            if (result) {
+                console.log(result);
+
+                // 조회 결과에서 사용자 이름 확인
+                res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+                res.write('<h1>등록 성공</h1>');
+                res.write("<br><br><a href='/public/index.html'>메인으로 돌아가기</a>");
+                res.end();
+            }
+            else {
+                // 조회된 레코드가 없는 경우 실패 응답 전송
+                res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+                res.write('<h1>검색 실패</h1');
+                res.write('<div><p>아이디와 패스워드를 다시 확인하십시오.</p></div>');
+                res.write("<br><br><a href='/public/index.html'>메인으로 돌아가기</a>");
+                res.end();
+            }
+        });
+    }
     res.sendFile(newFilePath, function (err) {
         if (err) {
             console.log('파일전송중 에러 : ', err);
@@ -94,20 +120,42 @@ router.route('/process/search').post(function (req, res) {
 // append 요청 처리
 router.route('/process/append').post(function (req, res) {
     var newFilePath = path.join(__dirname, 'public', 'append.html');
+    var paramName = req.body.name || req.query.name;
+    var paramContext = req.body.context || req.query.context;
     console.log("Append route called");
-    res.sendFile(newFilePath, function (err) {
-        if (err) {
-            console.log('파일전송중 에러 : ', err);
-        }
-    });
+    if (database) {
+        addContent(database, paramName, paramContext, (err, result) => {
+            if (err) { throw err };
+
+            if (result) {
+                console.log(result);
+
+                // 조회 결과에서 사용자 이름 확인
+                res.sendFile(newFilePath, function (err) {
+                    if (err) {
+                        console.log('파일전송중 에러 : ', err);
+                    }
+                });
+            }
+            else {
+                // 조회된 레코드가 없는 경우 실패 응답 전송
+                res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+                res.write('<h1>검색 실패</h1');
+                res.write('<div><p>아이디와 패스워드를 다시 확인하십시오.</p></div>');
+                res.write("<br><br><a href='/public/index.html'>메인으로 돌아가기</a>");
+                res.end();
+            }
+        });
+    }
+
 });
 
-router.route('/process/add').post(function(req,res){
+router.route('/process/add').post(function (req, res) {
 
     var paramName = req.body.name || req.query.name;
     var paramContext = req.body.context || req.query.context;
 
-    console.log('요청파라미터 : '+ paramName + ' ,' + paramContext);
+    console.log('요청파라미터 : ' + paramName + ' ,' + paramContext);
 
     if (database) {
 
@@ -144,23 +192,78 @@ router.route('/process/add').post(function(req,res){
 // 라우터 객체 등록
 app.use('/', router);
 
-var addContent = function(database, name, context, callback){
+var addContent = function (database, name, context, callback) {
+    console.log('addcontent 호출됨 : ' + name + ', ' + context);
+
+    // user 컬렉션
+    var memes = database.collection('memes');
+    // 아이디와 비밀번호를 이용해 검색
+    memes.find(
+        {
+            "name": name
+        }).toArray(function (err, docs) {
+            if (err) {
+                // 에러 발생시 콜백 함수를 호출하면서 에러 객체 전달
+                callback(err, null);
+                return;
+            }
+            if (docs.length > 0) {
+                // 조회한 레코드가 있는 경우 콜백함수를 호출하면서 조회 결과 전달
+                console.log('아이디 [%s] 일치하는 밈 찾음.', name);
+                callback(null, docs);
+            } else {
+                // 조회한 레코드가 없는 경우 콜백 함수를 호출하면서 null,null 전달
+                console.log('일치하는 밈 찾지 못함');
+                callback(null, null);
+            }
+        });
+};
+
+
+var searchMeme = function (database, name, context, callback) {
+    console.log('searchMeme 호출됨 : ' + name + ', ' + context);
+
+    // user 컬렉션
+    var memes = database.collection('meme');
+    // 아이디와 비밀번호를 이용해 검색
+    memes.find(
+        {
+            "name": name
+        }).toArray(function (err, docs) {
+            if (err) {
+                // 에러 발생시 콜백 함수를 호출하면서 에러 객체 전달
+                callback(err, null);
+                return;
+            }
+            if (docs.length > 0) {
+                // 조회한 레코드가 있는 경우 콜백함수를 호출하면서 조회 결과 전달
+                console.log('이름 [%s] 일치하는 밈 찾음.', name);
+                callback(null, docs);
+            } else {
+                // 조회한 레코드가 없는 경우 콜백 함수를 호출하면서 null,null 전달
+                console.log('일치하는 밈 찾지 못함');
+                callback(null, null);
+            }
+        });
+}
+
+var addContent = function (database, name, context, callback) {
     console.log("addcontent호출됨");
 
     var memes = database.collection('memes');
 
-    memes.insertMany([{"name":name,"context":context}],function(err,result){
-        if(err){
-            callback(err,null);
+    memes.insertMany([{ "name": name, "context": context }], function (err, result) {
+        if (err) {
+            callback(err, null);
             return;
         }
-        if(result.insertedCount>0){ 
+        if (result.insertedCount > 0) {
             console.log("밈 추가됨 : " + result.insertedCount)
         }
-        else{
+        else {
             console.log("추가된 레코드 없음");
         }
-        callback(null,result);
+        callback(null, result);
     });
 }
 // 404 에러 페이지 처리
